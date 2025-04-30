@@ -820,7 +820,6 @@
                     });
                 });
             }
-            
             // Checkout button
             checkoutBtn.addEventListener('click', function() {
                 if (cart.length === 0) {
@@ -828,8 +827,14 @@
                     return;
                 }
                 
-                alert('Proceeding to checkout...');
-                // In a real implementation, this would redirect to checkout page
+                // Calculate cart total for confirmation message
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                // Show confirmation dialog before proceeding to checkout
+                if (confirm(`Your total is $${total.toFixed(2)}. Proceed to checkout?`)) {
+                    // Redirect to checkout page
+                    window.location.href = 'checkout.html';
+                }
             });
         });
     </script>
