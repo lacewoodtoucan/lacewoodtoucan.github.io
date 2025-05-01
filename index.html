@@ -317,6 +317,27 @@
             position: relative;
         }
         
+        /* Add to cart notification */
+        .add-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 999;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .add-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         /* Contact form */
         form {
             max-width: 600px;
@@ -456,6 +477,9 @@
         </div>
     </div>
     
+    <!-- Add to cart notification -->
+    <div class="add-notification" id="add-notification">Item added to cart</div>
+    
     <section class="hero">
         <div class="hero-content">
             <h1>Handmade Homeware</h1>
@@ -565,6 +589,7 @@
             const emptyCartMessage = document.getElementById('empty-cart-message');
             const cartTotalElement = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
+            const addNotification = document.getElementById('add-notification');
             
             // Update cart count from localStorage on page load
             updateCartCount();
@@ -597,10 +622,21 @@
                     // Update cart count
                     updateCartCount();
                     
-                    // Show success message
-                    alert(`Added to cart: ${name} - £${price.toFixed(2)}`);
+                    // Show notification instead of alert
+                    showAddNotification(`${name} added to cart`);
                 });
             });
+            
+            // Show add to cart notification
+            function showAddNotification(message) {
+                addNotification.textContent = message;
+                addNotification.classList.add('show');
+                
+                // Hide notification after 2 seconds
+                setTimeout(() => {
+                    addNotification.classList.remove('show');
+                }, 2000);
+            }
             
             // Open cart modal
             cartIcon.addEventListener('click', function(e) {
@@ -707,18 +743,12 @@
             // Checkout button
             checkoutBtn.addEventListener('click', function() {
                 if (cart.length === 0) {
-                    alert('Your cart is empty!');
+                    showAddNotification('Your cart is empty!');
                     return;
                 }
                 
-                // Calculate cart total for confirmation message
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                
-                // Show confirmation dialog before proceeding to checkout
-                if (confirm(`Your total is £${total.toFixed(2)}. Proceed to checkout?`)) {
-                    // Redirect to checkout page
-                    window.location.href = 'checkout.html';
-                }
+                // Redirect to checkout page without confirmation
+                window.location.href = 'checkout.html';
             });
         });
     </script>
