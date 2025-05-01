@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Blue Clock | Lacewood Toucan</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #c0392b;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo img {
+            height: auto;
+            max-height: 50px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        nav {
+            width: 100%;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0.5rem 1rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+        
+        nav ul li a:hover, 
+        nav ul li a.active {
+            color: var(--accent);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            width: 100%;
+        }
+        
+        .breadcrumbs {
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumbs a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--accent);
+        }
+        
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .product-images {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .main-image {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .main-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        .image-thumbnails {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .thumbnail.active {
+            border-color: var(--accent);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-title {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quantity-selector button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-selector span {
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #a93226;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .buy-now-btn {
+            width: 100%;
+            background-color: var(--primary);
+        }
+        
+        .buy-now-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .product-features {
+            margin-top: 3rem;
+        }
+        
+        .feature-title {
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Cart Modal Styles */
+        #cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        
+        #cart-modal > div {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                justify-content: center;
+                text-align: center;
+                padding: 0.5rem;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+            
+            nav.open {
+                max-height: 300px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 0;
+                justify-content: center;
+            }
+            
+            .image-thumbnails {
+                justify-content: center;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Full%20name_Final.png" alt="Lacewood Toucan Logo">
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products" class="active">Products</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="#" id="cart-icon" style="position: relative;">
+                        <span style="font-size: 1.2rem;">🛒</span>
+                        <span id="cart-count" style="position: absolute; top: -8px; right: -8px; background-color: var(--accent); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: bold;">0</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal">
+        <div>
+            <button id="close-cart" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 style="margin-top: 0; color: var(--primary);">Your Cart</h2>
+            <div id="cart-items" style="margin-bottom: 1.5rem;">
+                <!-- Cart items will be added here dynamically -->
+                <p id="empty-cart-message">Your cart is empty.</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid #eee;">
+                <div>
+                    <strong>Total:</strong> <span id="cart-total">$0.00</span>
+                </div>
+                <button id="checkout-btn" class="btn" style="background-color: var(--primary);">Checkout</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> > <a href="index.html#products">Products</a> > <span>Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock</span>
+        </div>
+        
+        <div class="product-container">
+            <div class="product-images">
+                <div class="main-image">
+                    <img id="main-product-image" src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg" alt="Electric Blue Clock">
+                </div>
+                <div class="image-thumbnails">
+                    <div class="thumbnail active" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">
+                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg" alt="Electric Blue Clock Face">
+                    </div>
+                    <div class="thumbnail" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20close.jpg">
+                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20close.jpg" alt="Electric Blue Clock Close-up">
+                    </div>
+                    <div class="thumbnail" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20side.jpg">
+                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20side.jpg" alt="Electric Blue Clock Side View">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-details">
+                <h1 class="product-title">Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock</h1>
+                <p class="product-price">$249.00</p>
+                
+                <div class="product-description">
+                    <p>Hand-crafted luxury wall clock, with precision-cut black velvet floral detail over a metallic electric blue waxed oak veneer. 28cm (11") diameter wooden body, fitted with silent sweep-movement quartz mechanism, complete with gentle gold-coloured metal hands.</p>
+                    
+                    <p>As the faces are composed of natural materials, each product will have a unique grain, which can also result in colour variations. Please also be aware that appearance can vary significantly in different lightings, and tones display differently when viewed on different screens.</p>
+                </div>
+                
+                <div class="quantity-selector">
+                    <button id="decrease-quantity">-</button>
+                    <span id="quantity">1</span>
+                    <button id="increase-quantity">+</button>
+                </div>
+                
+                <button id="add-to-cart" class="btn add-to-cart-btn" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="249.00">Add to Cart</button>
+                <button id="buy-now" class="btn buy-now-btn">Buy Now</button>
+                
+                <div class="product-features">
+                    <h3 class="feature-title">Product Features</h3>
+                    <ul>
+                        <li>28cm (11") diameter</li>
+                        <li>Silent sweep-movement quartz mechanism</li>
+                        <li>Gold-coloured metal hands</li>
+                        <li>Precision-cut black velvet floral details</li>
+                        <li>Metallic electric blue waxed oak veneer</li>
+                        <li>Each piece is unique with natural wood grain variations</li>
+                        <li>Handmade with care</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Lacewood Toucan</h3>
+                <p>Handmade homeware crafted with care and attention to detail.</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Lacewood Toucan. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('open');
+            });
+            
+            // Image gallery functionality
+            const mainImage = document.getElementById('main-product-image');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    // Update main image
+                    mainImage.src = this.getAttribute('data-image');
+                    
+                    // Update active thumbnail
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Quantity selector
+            const decreaseBtn = document.getElementById('decrease-quantity');
+            const increaseBtn = document.getElementById('increase-quantity');
+            const quantityElement = document.getElementById('quantity');
+            let quantity = 1;
+            
+            decreaseBtn.addEventListener('click', function() {
+                if (quantity > 1) {
+                    quantity--;
+                    quantityElement.textContent = quantity;
+                }
+            });
+            
+            increaseBtn.addEventListener('click', function() {
+                quantity++;
+                quantityElement.textContent = quantity;
+            });
+            
+            // Shopping Cart Functionality
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCountElement = document.getElementById('cart-count');
+            const cartIcon = document.getElementById('cart-icon');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCartBtn = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartTotalElement = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            // Update cart count from localStorage on page load
+            updateCartCount();
+            
+            // Add to cart functionality
+            const addToCartBtn = document.getElementById('add-to-cart');
+            addToCartBtn.addEventListener('click', function() {
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+                
+                // Check if item already exists in cart
+                const existingItemIndex = cart.findIndex(item => item.name === name);
+                
+                if (existingItemIndex !== -1) {
+                    // Item exists, increase quantity by selected quantity
+                    cart[existingItemIndex].quantity += quantity;
+                } else {
+                    // Add new item with selected quantity
+                    cart.push({
+                        name: name,
+                        price: price,
+                        quantity: quantity
+                    });
+                }
+                
+                // Save cart to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Update cart count
+                updateCartCount();
+                
+                // Show success message
+                alert(`Added to cart: ${name} - Quantity: ${quantity} - Total: $${(price * quantity).toFixed(2)}`);
+            });
+            
+            // Buy now button
+            const buyNowBtn = document.getElementById('buy-now');
+            buyNowBtn.addEventListener('click', function() {
+                const name = addToCartBtn.getAttribute('data-name');
+                const price = parseFloat(addToCartBtn.getAttribute('data-price'));
+                
+                // Add item to cart
+                const existingItemIndex = cart.findIndex(item => item.name === name);
+                
+                if (existingItemIndex !== -1) {
+                    // Item exists, increase quantity by selected quantity
+                    cart[existingItemIndex].quantity += quantity;
+                } else {
+                    // Add new item with selected quantity
+                    cart.push({
+                        name: name,
+                        price: price,
+                        quantity: quantity
+                    });
+                }
+                
+                // Save cart to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Redirect to checkout page
+                window.location.href = 'checkout.html';
+            });
+            
+            // Open cart modal
+            cartIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                updateCartDisplay();
+                cartModal.style.display = 'flex';
+            });
+            
+            // Close cart modal
+            closeCartBtn.addEventListener('click', function() {
+                cartModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            cartModal.addEventListener('click', function(e) {
+                if (e.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+            
+            // Update cart count
+            function updateCartCount() {
+                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+            }
+            
+            // Update cart display
+            function updateCartDisplay() {
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p id="empty-cart-message">Your cart is empty.</p>';
+                    cartTotalElement.textContent = '$0.00';
+                    return;
+                }
+                
+                let cartHTML = '';
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    cartHTML += `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
+                            <div style="margin-right: 1rem; min-width: 200px;">
+                                <h4 style="margin: 0 0 0.5rem 0;">${item.name}</h4>
+                                <div style="display: flex; align-items: center;">
+                                    <button class="quantity-btn" data-action="decrease" data-index="${index}" style="background: var(--primary); color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer;">-</button>
+                                    <span style="margin: 0 10px;">Qty: ${item.quantity}</span>
+                                    <button class="quantity-btn" data-action="increase" data-index="${index}" style="background: var(--primary); color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer;">+</button>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="text-align: right; font-weight: bold;">$${itemTotal.toFixed(2)}</div>
+                                <button class="remove-item" data-index="${index}" style="background: none; border: none; color: var(--accent); cursor: pointer; padding: 5px 0; font-size: 0.8rem;">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                cartItemsContainer.innerHTML = cartHTML;
+                cartTotalElement.textContent = `$${total.toFixed(2)}`;
+                
+                // Add event listeners to quantity buttons
+                document.querySelectorAll('.quantity-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        const action = this.getAttribute('data-action');
+                        
+                        if (action === 'increase') {
+                            cart[index].quantity += 1;
+                        } else if (action === 'decrease') {
+                            if (cart[index].quantity > 1) {
+                                cart[index].quantity -= 1;
+                            } else {
+                                // Remove item if quantity would be less than 1
+                                cart.splice(index, 1);
+                            }
+                        }
+                        
+                        // Save updated cart
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        
+                        // Update display
+                        updateCartCount();
+                        updateCartDisplay();
+                    });
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cart.splice(index, 1);
+                        
+                        // Save updated cart
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        
+                        // Update display
+                        updateCartCount();
+                        updateCartDisplay();
+                    });
+                });
+            }
+            
+            // Checkout button
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                
+                // Calculate cart total for confirmation message
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                // Show confirmation dialog before proceeding to checkout
+                if (confirm(`Your total is $${total.toFixed(2)}. Proceed to checkout?`)) {
+                    // Redirect to checkout page
+                    window.location.href = 'checkout.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
