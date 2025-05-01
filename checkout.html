@@ -261,6 +261,12 @@
             font-size: 0.9rem;
         }
         
+        .currency-note {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
         @media (max-width: 768px) {
             .checkout-container {
                 flex-direction: column;
@@ -293,7 +299,7 @@
                 </div>
                 <div class="order-total">
                     <span>Total:</span>
-                    <span id="checkout-total">$0.00</span>
+                    <span id="checkout-total">£0.00</span>
                 </div>
                 <div style="margin-top: 2rem;">
                     <a href="index.html" class="btn btn-back">Back to Shopping</a>
@@ -355,6 +361,7 @@
                         </div>
                     </div>
                 </div>
+                <p class="currency-note">All prices displayed are in British Pounds (£).</p>
             </div>
         </div>
     </div>
@@ -398,7 +405,7 @@
             function displayCheckoutItems() {
                 if (cart.length === 0) {
                     checkoutItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
-                    checkoutTotalElement.textContent = '$0.00';
+                    checkoutTotalElement.textContent = '£0.00';
                     return;
                 }
                 
@@ -413,17 +420,17 @@
                         <div class="cart-item">
                             <div class="item-details">
                                 <div class="item-name">${item.name}</div>
-                                <div class="item-price">$${item.price.toFixed(2)} each</div>
+                                <div class="item-price">£${item.price.toFixed(2)} each</div>
                             </div>
                             <div class="item-quantity">
-                                ${item.quantity} × $${item.price.toFixed(2)} = $${itemTotal.toFixed(2)}
+                                ${item.quantity} × £${item.price.toFixed(2)} = £${itemTotal.toFixed(2)}
                             </div>
                         </div>
                     `;
                 });
                 
                 checkoutItemsContainer.innerHTML = checkoutHTML;
-                checkoutTotalElement.textContent = `$${total.toFixed(2)}`;
+                checkoutTotalElement.textContent = `£${total.toFixed(2)}`;
             }
             
             // Display checkout items on page load
