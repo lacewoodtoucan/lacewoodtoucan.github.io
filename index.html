@@ -449,7 +449,7 @@
             </div>
             <div style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid #eee;">
                 <div>
-                    <strong>Total:</strong> <span id="cart-total">$0.00</span>
+                    <strong>Total:</strong> <span id="cart-total">£0.00</span>
                 </div>
                 <button id="checkout-btn" class="btn" style="background-color: var(--primary);">Checkout</button>
             </div>
@@ -477,12 +477,12 @@
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock</h3>
-                        <p class="product-price">$249.00</p>
+                        <p class="product-price">£199.00</p>
                         <p class="product-description">Hand-crafted luxury wall clock, with precision-cut black velvet floral detail over a metallic electric blue waxed oak veneer.</p>
                     </div>
                 </a>
                 <div class="product-info" style="padding-top: 0;">
-                    <button class="add-to-cart" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="249.00">Add to Cart</button>
+                    <button class="add-to-cart" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="199.00">Add to Cart</button>
                 </div>
             </div>
             
@@ -494,12 +494,12 @@
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">Luxury Floral Black Velvet on Pink Oak Veneer Wall Clock</h3>
-                        <p class="product-price">$249.00</p>
+                        <p class="product-price">£199.00</p>
                         <p class="product-description">Hand-crafted luxury wall clock, with precision-cut black velvet floral detail over a metallic pink waxed oak veneer.</p>
                     </div>
                 </a>
                 <div class="product-info" style="padding-top: 0;">
-                    <button class="add-to-cart" data-name="Luxury Floral Black Velvet on Pink Oak Veneer Wall Clock" data-price="249.00">Add to Cart</button>
+                    <button class="add-to-cart" data-name="Luxury Floral Black Velvet on Pink Oak Veneer Wall Clock" data-price="199.00">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -598,7 +598,7 @@
                     updateCartCount();
                     
                     // Show success message
-                    alert(`Added to cart: ${name} - $${price.toFixed(2)}`);
+                    alert(`Added to cart: ${name} - £${price.toFixed(2)}`);
                 });
             });
             
@@ -631,7 +631,7 @@
             function updateCartDisplay() {
                 if (cart.length === 0) {
                     cartItemsContainer.innerHTML = '<p id="empty-cart-message">Your cart is empty.</p>';
-                    cartTotalElement.textContent = '$0.00';
+                    cartTotalElement.textContent = '£0.00';
                     return;
                 }
                 
@@ -653,7 +653,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div style="text-align: right; font-weight: bold;">$${itemTotal.toFixed(2)}</div>
+                                <div style="text-align: right; font-weight: bold;">£${itemTotal.toFixed(2)}</div>
                                 <button class="remove-item" data-index="${index}" style="background: none; border: none; color: var(--accent); cursor: pointer; padding: 5px 0; font-size: 0.8rem;">Remove</button>
                             </div>
                         </div>
@@ -661,7 +661,7 @@
                 });
                 
                 cartItemsContainer.innerHTML = cartHTML;
-                cartTotalElement.textContent = `$${total.toFixed(2)}`;
+                cartTotalElement.textContent = `£${total.toFixed(2)}`;
                 
                 // Add event listeners to quantity buttons
                 document.querySelectorAll('.quantity-btn').forEach(button => {
@@ -715,7 +715,7 @@
                 const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 
                 // Show confirmation dialog before proceeding to checkout
-                if (confirm(`Your total is $${total.toFixed(2)}. Proceed to checkout?`)) {
+                if (confirm(`Your total is £${total.toFixed(2)}. Proceed to checkout?`)) {
                     // Redirect to checkout page
                     window.location.href = 'checkout.html';
                 }
