@@ -214,51 +214,11 @@
         .btn-back {
             background-color: var(--secondary);
             margin-bottom: 1rem;
+            text-align: center;
         }
         
         .btn-back:hover {
             background-color: var(--primary);
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 5%;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bdc3c7;
-            font-size: 0.9rem;
         }
         
         .currency-note {
@@ -303,7 +263,7 @@
                     <span>Total:</span>
                     <span id="checkout-total">£0.00</span>
                 </div>
-                <div style="margin-top: 2rem;">
+                <div style="margin-top: 2rem; text-align: center;">
                     <a href="index.html" class="btn btn-back">Back to Shopping</a>
                 </div>
             </div>
@@ -367,18 +327,6 @@
             </div>
         </div>
     </div>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Lacewood Toucan</h3>
-                <p>Handmade homeware crafted with care and attention to detail.</p>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2025 Lacewood Toucan. All rights reserved.
-        </div>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
