@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Lacewood Toucan</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #c0392b;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo img {
+            height: auto;
+            max-height: 50px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+        
+        .checkout-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .checkout-summary {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .checkout-payment {
+            flex: 2;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .summary-title, .payment-title {
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        
+        .item-price {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .item-quantity {
+            text-align: right;
+            min-width: 60px;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: var(--primary);
+        }
+        
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .payment-option:hover, .payment-option.selected {
+            border-color: var(--primary);
+        }
+        
+        .payment-option-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .payment-logo {
+            height: 40px;
+        }
+        
+        .payment-details {
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .payment-option.selected .payment-details {
+            display: block;
+        }
+        
+        .credit-card-form input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #a93226;
+        }
+        
+        .paypal-button {
+            background-color: #0070ba;
+        }
+        
+        .paypal-button:hover {
+            background-color: #005ea6;
+        }
+        
+        .btn-back {
+            background-color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .btn-back:hover {
+            background-color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-container {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Full%20name_Final.png" alt="Lacewood Toucan Logo">
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1>Checkout</h1>
+        
+        <div class="checkout-container">
+            <div class="checkout-summary">
+                <h2 class="summary-title">Order Summary</h2>
+                <div id="checkout-items">
+                    <!-- Cart items will be populated here -->
+                </div>
+                <div class="order-total">
+                    <span>Total:</span>
+                    <span id="checkout-total">$0.00</span>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <a href="index.html" class="btn btn-back">Back to Shopping</a>
+                </div>
+            </div>
+            
+            <div class="checkout-payment">
+                <h2 class="payment-title">Payment Method</h2>
+                
+                <div class="payment-methods">
+                    <!-- PayPal Option -->
+                    <div class="payment-option" data-method="paypal">
+                        <div class="payment-option-header">
+                            <h3>PayPal</h3>
+                            <img src="/api/placeholder/120/40" alt="PayPal Logo" class="payment-logo">
+                        </div>
+                        <div class="payment-details">
+                            <p>You will be redirected to PayPal to complete your payment.</p>
+                            <button class="btn paypal-button" id="paypal-button">Pay with PayPal</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Credit Card Option -->
+                    <div class="payment-option" data-method="credit-card">
+                        <div class="payment-option-header">
+                            <h3>Credit Card</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <img src="/api/placeholder/40/40" alt="Visa" style="height: 30px;">
+                                <img src="/api/placeholder/40/40" alt="Mastercard" style="height: 30px;">
+                                <img src="/api/placeholder/40/40" alt="American Express" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="payment-details">
+                            <form class="credit-card-form">
+                                <div class="form-group">
+                                    <label for="card-name">Cardholder Name</label>
+                                    <input type="text" id="card-name" placeholder="John Doe">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="card-number">Card Number</label>
+                                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiry-date">Expiry Date</label>
+                                        <input type="text" id="expiry-date" placeholder="MM/YY">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="cvv">CVV</label>
+                                        <input type="text" id="cvv" placeholder="123">
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn" id="credit-card-button">Pay Now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Lacewood Toucan</h3>
+                <p>Handmade homeware crafted with care and attention to detail.</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Lacewood Toucan. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get cart data from localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const checkoutItemsContainer = document.getElementById('checkout-items');
+            const checkoutTotalElement = document.getElementById('checkout-total');
+            
+            // Payment method selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selected class from all options
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Select default payment method
+            if (paymentOptions.length > 0) {
+                paymentOptions[0].classList.add('selected');
+            }
+            
+            // Display cart items in checkout
+            function displayCheckoutItems() {
+                if (cart.length === 0) {
+                    checkoutItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                    checkoutTotalElement.textContent = '$0.00';
+                    return;
+                }
+                
+                let checkoutHTML = '';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    checkoutHTML += `
+                        <div class="cart-item">
+                            <div class="item-details">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-price">$${item.price.toFixed(2)} each</div>
+                            </div>
+                            <div class="item-quantity">
+                                ${item.quantity} × $${item.price.toFixed(2)} = $${itemTotal.toFixed(2)}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                checkoutItemsContainer.innerHTML = checkoutHTML;
+                checkoutTotalElement.textContent = `$${total.toFixed(2)}`;
+            }
+            
+            // Display checkout items on page load
+            displayCheckoutItems();
+            
+            // Handle form submission
+            document.querySelector('.credit-card-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Payment successful! Thank you for your order.');
+                // In a real implementation, this would send the payment info to a payment processor
+                // After successful payment, clear the cart and redirect to a confirmation page
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            });
+            
+            // Handle PayPal button
+            document.getElementById('paypal-button').addEventListener('click', function() {
+                alert('Redirecting to PayPal... Payment successful!');
+                // In a real implementation, this would redirect to PayPal
+                // After successful payment, clear the cart and redirect to a confirmation page
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
