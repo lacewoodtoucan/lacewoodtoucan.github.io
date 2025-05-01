@@ -160,7 +160,12 @@
         
         .payment-details {
             margin-top: 1rem;
+            padding: 0.5rem;
             display: none;
+        }
+        
+        .credit-card-form {
+            padding: 0.5rem;
         }
         
         .payment-option.selected .payment-details {
@@ -168,11 +173,12 @@
         }
         
         .credit-card-form input {
-            width: 100%;
+            width: calc(100% - 1.6rem);
             padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin-bottom: 1rem;
+            box-sizing: border-box;
         }
         
         .form-row {
@@ -182,6 +188,12 @@
         
         .form-group {
             flex: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
         }
         
         .btn {
