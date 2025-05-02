@@ -601,39 +601,78 @@
             const addToCartBtn = document.getElementById('add-to-cart');
             if (addToCartBtn) {
                 addToCartBtn.addEventListener('click', function() {
-                    // Get product information from the page
-                    const productId = this.getAttribute('data-product-id');
-                    const productName = this.getAttribute('data-name');
-                    const productPrice = parseFloat(this.getAttribute('data-price'));
-                    const productQuantity = parseInt(document.getElementById('quantity').textContent);
-                    const productThumbnail = document.querySelector('.product-image img').src; // Get the product image URL
-                    
-                    // Check if product already exists in cart
-                    const existingItemIndex = cart.findIndex(item => item.id === productId);
-                    
-                    if (existingItemIndex !== -1) {
-                        // Product exists, increase quantity
-                        cart[existingItemIndex].quantity += productQuantity;
-                    } else {
-                        // Add new product
-                        cart.push({
-                            id: productId,
-                            name: productName,
-                            price: productPrice,
-                            quantity: productQuantity,
-                            thumbnail: productThumbnail
-                        });
-                    }
-                    
-                    // Save cart to localStorage
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    
-                    // Update cart count
-                    updateCartCount();
-                    
-                    // Show notification
-                    showNotification('Item added to cart');
-                });
+    // Get product information from the page
+    const productId = this.getAttribute('data-product-id');
+    const productName = this.getAttribute('data-name');
+    const productPrice = parseFloat(this.getAttribute('data-price'));
+    const productQuantity = parseInt(document.getElementById('quantity').textContent);
+    const productThumbnail = this.getAttribute('data-image'); // Get the product image from data attribute
+    
+    // Check if product already exists in cart based on product ID
+    const existingItemIndex = cart.findIndex(item => item.id === productId);
+    
+    if (existingItemIndex !== -1) {
+        // Product exists, increase quantity
+        cart[existingItemIndex].quantity += productQuantity;
+    } else {
+        // Add new product
+        cart.push({
+            id: productId,
+            name: productName,
+            price: productPrice,
+            quantity: productQuantity,
+            thumbnail: productThumbnail
+        });
+    }
+    
+    // Save cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Update cart count
+    updateCartCount();
+    
+    // Show notification
+    showNotification('Item added to cart');
+});
+
+// Fix for index.html to add productId to the product data 
+// This is for the addToCartButtons event listener
+
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const name = this.getAttribute('data-name');
+        const price = parseFloat(this.getAttribute('data-price'));
+        const image = this.getAttribute('data-image');
+        // Create a consistent productId from the name
+        const productId = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+        
+        // Check if item already exists in cart based on product ID
+        const existingItemIndex = cart.findIndex(item => item.id === productId);
+        
+        if (existingItemIndex !== -1) {
+            // Item exists, increase quantity
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            // Add new item
+            cart.push({
+                id: productId,
+                name: name,
+                price: price,
+                quantity: 1,
+                thumbnail: image
+            });
+        }
+        
+        // Save cart to localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Update cart count
+        updateCartCount();
+        
+        // Show notification
+        showAddNotification(`${name} added to cart`);
+    });
+});
             }
             
             // Buy now button click event
