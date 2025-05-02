@@ -289,7 +289,6 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
-        
         /* Cart Modal Styles */
         #cart-modal {
             display: none;
@@ -317,25 +316,104 @@
             position: relative;
         }
         
+        /* New Cart Item Styles with Thumbnails */
+        .cart-item {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            align-items: center;
+        }
+
+        .cart-item-thumbnail {
+            margin-right: 15px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-thumbnail img {
+            max-width: 60px;
+            max-height: 60px;
+            width: auto;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            object-fit: contain;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .cart-item-details p {
+            margin: 0;
+            color: #666;
+        }
+
+        .item-total {
+            font-weight: bold;
+            color: #333 !important;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn, .remove-btn {
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+
+        .remove-btn {
+            color: #e74c3c;
+            font-size: 18px;
+        }
+
+        .item-quantity {
+            margin: 0 8px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+        
         /* Add to cart notification */
-        .add-notification {
+        .notification {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: var(--primary);
+            background-color: #2ecc71;
             color: white;
             padding: 12px 20px;
             border-radius: 4px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s, transform 0.3s;
-            z-index: 999;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        
-        .add-notification.show {
             opacity: 1;
-            transform: translateY(0);
+            transition: opacity 0.5s;
+            z-index: 1000;
+        }
+
+        .notification.hide {
+            opacity: 0;
         }
         
         /* Contact form */
@@ -466,19 +544,22 @@
             <h2 style="margin-top: 0; color: var(--primary);">Your Cart</h2>
             <div id="cart-items" style="margin-bottom: 1.5rem;">
                 <!-- Cart items will be added here dynamically -->
-                <p id="empty-cart-message">Your cart is empty.</p>
+                <div class="empty-cart">Your cart is empty</div>
             </div>
             <div style="display: flex; justify-content: space-between; padding-top: 1rem; border-top: 1px solid #eee;">
                 <div>
                     <strong>Total:</strong> <span id="cart-total">£0.00</span>
                 </div>
-                <button id="checkout-btn" class="btn" style="background-color: var(--primary);">Checkout</button>
+                <div>
+                    <button id="clear-cart" class="btn" style="background-color: #95a5a6; margin-right: 10px;">Clear Cart</button>
+                    <button id="checkout-btn" class="btn" style="background-color: var(--primary);">Checkout</button>
+                </div>
             </div>
         </div>
     </div>
     
     <!-- Add to cart notification -->
-    <div class="add-notification" id="add-notification">Item added to cart</div>
+    <div class="notification" id="add-notification">Item added to cart</div>
     
     <section class="hero">
         <div class="hero-content">
@@ -506,7 +587,7 @@
                     </div>
                 </a>
                 <div class="product-info" style="padding-top: 0;">
-                    <button class="add-to-cart" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="199.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">Add to Cart</button>
+                    <button class="add-to-cart" data-product-id="blue-clock-001" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="59.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">Add to Cart</button>
                 </div>
             </div>
             
@@ -523,7 +604,7 @@
                     </div>
                 </a>
                 <div class="product-info" style="padding-top: 0;">
-                    <button class="add-to-cart" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="59.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">Add to Cart</button>
+                    <button class="add-to-cart" data-product-id="pink-clock-001" data-name="Luxury Floral Black Velvet on Pink Oak Veneer Wall Clock" data-price="199.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Pink%20Clock/pink%20clock%20face.jpg">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -579,30 +660,24 @@
                 });
             });
             
-            // Shopping Cart Functionality
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartCountElement = document.getElementById('cart-count');
-            const cartIcon = document.getElementById('cart-icon');
-            const cartModal = document.getElementById('cart-modal');
-            const closeCartBtn = document.getElementById('close-cart');
-            const cartItemsContainer = document.getElementById('cart-items');
-            const emptyCartMessage = document.getElementById('empty-cart-message');
-            const cartTotalElement = document.getElementById('cart-total');
-            const checkoutBtn = document.getElementById('checkout-btn');
-            const addNotification = document.getElementById('add-notification');
+            // Initialize cart from local storage or create empty cart
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
             
-            // Update cart count from localStorage on page load
+            // Update cart count in navigation
             updateCartCount();
             
             // Add to cart functionality
             const addToCartButtons = document.querySelectorAll('.add-to-cart');
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const name = this.getAttribute('data-name');
-                    const price = parseFloat(this.getAttribute('data-price'));
+                    // Get product information from data attributes
+                    const productId = this.getAttribute('data-product-id');
+                    const productName = this.getAttribute('data-name');
+                    const productPrice = parseFloat(this.getAttribute('data-price'));
+                    const productThumbnail = this.getAttribute('data-image');
                     
                     // Check if item already exists in cart
-                    const existingItemIndex = cart.findIndex(item => item.name === name);
+                    const existingItemIndex = cart.findIndex(item => item.id === productId);
                     
                     if (existingItemIndex !== -1) {
                         // Item exists, increase quantity
@@ -610,9 +685,11 @@
                     } else {
                         // Add new item
                         cart.push({
-                            name: name,
-                            price: price,
-                            quantity: 1
+                            id: productId,
+                            name: productName,
+                            price: productPrice,
+                            quantity: 1,
+                            thumbnail: productThumbnail
                         });
                     }
                     
@@ -622,33 +699,54 @@
                     // Update cart count
                     updateCartCount();
                     
-                    // Show notification instead of alert
-                    showAddNotification(`${name} added to cart`);
+                    // Show notification
+                    showNotification('Item added to cart');
                 });
             });
             
-            // Show add to cart notification
-            function showAddNotification(message) {
-                addNotification.textContent = message;
-                addNotification.classList.add('show');
+            // Show notification
+            function showNotification(message) {
+                // Create notification element if it doesn't exist
+                let notification = document.querySelector('.notification');
+                if (!notification) {
+                    notification = document.createElement('div');
+                    notification.className = 'notification';
+                    document.body.appendChild(notification);
+                }
+                
+                notification.textContent = message;
+                notification.classList.remove('hide');
                 
                 // Hide notification after 2 seconds
-                setTimeout(() => {
-                    addNotification.classList.remove('show');
+                setTimeout(function() {
+                    notification.classList.add('hide');
                 }, 2000);
             }
             
+            // Shopping Cart Functionality
+            const cartIcon = document.getElementById('cart-icon');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCartBtn = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const clearCartBtn = document.getElementById('clear-cart');
+            
             // Open cart modal
-            cartIcon.addEventListener('click', function(e) {
-                e.preventDefault();
-                updateCartDisplay();
-                cartModal.style.display = 'flex';
-            });
+            if (cartIcon) {
+                cartIcon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    updateCartDisplay();
+                    cartModal.style.display = 'flex';
+                });
+            }
             
             // Close cart modal
-            closeCartBtn.addEventListener('click', function() {
-                cartModal.style.display = 'none';
-            });
+            if (closeCartBtn) {
+                closeCartBtn.addEventListener('click', function() {
+                    cartModal.style.display = 'none';
+                });
+            }
             
             // Close modal when clicking outside
             cartModal.addEventListener('click', function(e) {
@@ -657,16 +755,47 @@
                 }
             });
             
+            // Clear cart
+            if (clearCartBtn) {
+                clearCartBtn.addEventListener('click', function() {
+                    cart = [];
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCartCount();
+                    updateCartDisplay();
+                });
+            }
+            
+            // Checkout button
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    if (cart.length === 0) {
+                        showNotification('Your cart is empty!');
+                        return;
+                    }
+                    
+                    // Redirect to checkout page
+                    window.location.href = 'checkout.html';
+                });
+            }
+            
             // Update cart count
             function updateCartCount() {
-                const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-                cartCountElement.textContent = totalItems;
+                const cartCountElement = document.getElementById('cart-count');
+                if (cartCountElement) {
+                    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                    cartCountElement.textContent = totalItems;
+                }
             }
             
             // Update cart display
             function updateCartDisplay() {
+                if (!cartItemsContainer || !cartTotalElement) {
+                    console.error("Cart elements not found");
+                    return;
+                }
+                
                 if (cart.length === 0) {
-                    cartItemsContainer.innerHTML = '<p id="empty-cart-message">Your cart is empty.</p>';
+                    cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
                     cartTotalElement.textContent = '£0.00';
                     return;
                 }
@@ -679,18 +808,20 @@
                     total += itemTotal;
                     
                     cartHTML += `
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border
-                            <div style="margin-right: 1rem; min-width: 200px;">
-                                <h4 style="margin: 0 0 0.5rem 0;">${item.name}</h4>
-                                <div style="display: flex; align-items: center;">
-                                    <button class="quantity-btn" data-action="decrease" data-index="${index}" style="background: var(--primary); color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer;">-</button>
-                                    <span style="margin: 0 10px;">Qty: ${item.quantity}</span>
-                                    <button class="quantity-btn" data-action="increase" data-index="${index}" style="background: var(--primary); color: white; border: none; width: 25px; height: 25px; border-radius: 50%; cursor: pointer;">+</button>
-                                </div>
+                        <div class="cart-item">
+                            <div class="cart-item-thumbnail">
+                                <img src="${item.thumbnail || 'placeholder.jpg'}" alt="${item.name}">
                             </div>
-                            <div>
-                                <div style="text-align: right; font-weight: bold;">£${itemTotal.toFixed(2)}</div>
-                                <button class="remove-item" data-index="${index}" style="background: none; border: none; color: var(--accent); cursor: pointer; padding: 5px 0; font-size: 0.8rem;">Remove</button>
+                            <div class="cart-item-details">
+                                <h3>${item.name}</h3>
+                                <p>£${item.price.toFixed(2)} x ${item.quantity}</p>
+                                <p class="item-total">£${itemTotal.toFixed(2)}</p>
+                            </div>
+                            <div class="cart-item-actions">
+                                <button class="quantity-btn" data-action="decrease" data-index="${index}">-</button>
+                                <span class="item-quantity">${item.quantity}</span>
+                                <button class="quantity-btn" data-action="increase" data-index="${index}">+</button>
+                                <button class="remove-btn" data-index="${index}">×</button>
                             </div>
                         </div>
                     `;
@@ -699,7 +830,7 @@
                 cartItemsContainer.innerHTML = cartHTML;
                 cartTotalElement.textContent = `£${total.toFixed(2)}`;
                 
-                // Add event listeners to quantity buttons
+                // Add event listeners to quantity and remove buttons
                 document.querySelectorAll('.quantity-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const index = parseInt(this.getAttribute('data-index'));
@@ -725,8 +856,7 @@
                     });
                 });
                 
-                // Add event listeners to remove buttons
-                document.querySelectorAll('.remove-item').forEach(button => {
+                document.querySelectorAll('.remove-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const index = parseInt(this.getAttribute('data-index'));
                         cart.splice(index, 1);
@@ -740,16 +870,6 @@
                     });
                 });
             }
-            // Checkout button
-            checkoutBtn.addEventListener('click', function() {
-                if (cart.length === 0) {
-                    showAddNotification('Your cart is empty!');
-                    return;
-                }
-                
-                // Redirect to checkout page without confirmation
-                window.location.href = 'checkout.html';
-            });
         });
     </script>
 </body>
