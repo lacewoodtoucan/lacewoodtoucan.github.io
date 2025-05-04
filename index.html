@@ -11,7 +11,7 @@
         :root {
             --primary: #2c3e50;
             --secondary: #34495e;
-            --accent: #c0392b;
+            --accent: #00b8b8; /* Changed to bright teal/turquoise */
             --light: #ecf0f1;
             --dark: #2c3e50;
             --handwritten: 'Caveat', cursive;
@@ -145,6 +145,10 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: var(--primary);
+            font-family: var(--handwritten); /* Apply handwritten font to title */
+            font-weight: 700;
+            font-size: 3rem;
+            letter-spacing: 1px;
         }
         
         .hero p {
@@ -165,7 +169,7 @@
         }
         
         .btn:hover {
-            background-color: #a93226;
+            background-color: #009999; /* Darker teal for hover state */
         }
         
         .container {
@@ -505,7 +509,7 @@
             }
             
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2.5rem; /* Slightly larger font size for mobile */
             }
             
             .hero p {
@@ -590,7 +594,7 @@
     
     <section class="hero">
         <div class="hero-content">
-            <h1 style="font-size: 1.5rem; letter-spacing: 1.5px; font-weight: 400; margin-bottom: 0.8rem; color: var(--primary);">Handmade Homeware</h1>
+            <h1>Handmade Homeware</h1>
             <p style="font-size: 1rem; font-weight: 300; max-width: 500px; margin: 0 auto 1.8rem; line-height: 1.5; color: var(--secondary); font-style: italic;">Discover our collection of artisan-made products that bring warmth and style to your living space.</p>
             <a href="#products" class="btn">Shop Now</a>
         </div>
