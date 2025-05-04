@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Blue Clock | Lacewood Toucan</title>
+    <title>Lacewood Toucan | Handmade Homeware</title>
     <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+        
         :root {
             --primary: #2c3e50;
             --secondary: #34495e;
-            --accent: #c0392b;
+            --accent: #00b8b8; /* Changed to bright teal/turquoise */
             --light: #ecf0f1;
             --dark: #2c3e50;
+            --handwritten: 'Caveat', cursive;
         }
         
         body {
@@ -20,13 +24,13 @@
             background-color: #f8f9fa;
             color: var(--dark);
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
             width: 100%;
             box-sizing: border-box;
         }
         
         *, *:before, *:after {
-            box-sizing: inherit;
+            box-sizing: inherit; /* Ensure all elements respect box-sizing */
         }
         
         img {
@@ -50,7 +54,7 @@
             padding: 1rem 5%;
             max-width: 1200px;
             margin: 0 auto;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
         }
         
         .logo {
@@ -61,8 +65,15 @@
         
         .logo img {
             height: auto;
-            max-height: 50px;
+            max-height: 50px; /* Default size for mobile */
             margin-right: 1rem;
+        }
+        
+        /* Make logo larger on desktop */
+        @media (min-width: 768px) {
+            .logo img {
+                max-height: 100px; /* Approximately twice as big for desktop */
+            }
         }
         
         .logo-text {
@@ -71,6 +82,13 @@
             color: var(--primary);
         }
         
+        .tagline {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--secondary);
+        }
+        
+        /* Mobile menu styles */
         .mobile-menu-toggle {
             display: none;
             background: none;
@@ -91,7 +109,7 @@
             padding: 0;
             margin: 0;
             justify-content: center;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
         }
         
         nav ul li {
@@ -111,122 +129,32 @@
             color: var(--accent);
         }
         
-        .container {
-            max-width: 1200px;
+        .hero {
+            background-color: var(--light);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem 5%;
-            width: 100%;
+            padding: 0 1rem;
         }
         
-        .breadcrumbs {
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-        
-        .breadcrumbs a {
-            color: var(--secondary);
-            text-decoration: none;
-        }
-        
-        .breadcrumbs a:hover {
-            color: var(--accent);
-        }
-        
-        .product-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        .product-images {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .main-image {
+        .hero h1 {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .main-image img {
-            width: 100%;
-            display: block;
-        }
-        
-        .image-thumbnails {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            border-radius: 4px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border: 2px solid transparent;
-            transition: border-color 0.3s;
-        }
-        
-        .thumbnail.active {
-            border-color: var(--accent);
-        }
-        
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .product-details {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .product-title {
             color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-family: var(--handwritten); /* Apply handwritten font to title */
+            font-weight: 700;
+            font-size: 3rem;
+            letter-spacing: 1px;
         }
         
-        .product-price {
-            color: var(--accent);
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .product-description {
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-        
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .quantity-selector button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
+        .hero p {
             font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .quantity-selector span {
-            margin: 0 1rem;
-            font-weight: 500;
+            margin-bottom: 2rem;
+            color: var(--secondary);
         }
         
         .btn {
@@ -238,38 +166,142 @@
             text-decoration: none;
             font-weight: 500;
             transition: background-color 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
         }
         
         .btn:hover {
-            background-color: #a93226;
+            background-color: #009999; /* Darker teal for hover state */
         }
         
-        .add-to-cart-btn {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 5%;
             width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-img img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
             margin-bottom: 1rem;
         }
         
-        .buy-now-btn {
-            width: 100%;
-            background-color: var(--primary);
+        .product-description {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
         }
         
-        .buy-now-btn:hover {
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
             background-color: var(--secondary);
         }
         
-        .product-features {
-            margin-top: 3rem;
+        /* Product showcase styles */
+        .product-showcase {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
         
-        .feature-title {
-            color: var(--primary);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
+        .product-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .product-gallery div {
+            flex: 1;
+            min-width: 280px;
+            max-width: 100%;
             margin-bottom: 1rem;
+        }
+        
+        .product-gallery img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
         /* Cart Modal Styles */
@@ -380,24 +412,57 @@
             padding: 30px;
             color: #777;
         }
-
+        
+        /* Add to cart notification */
         .notification {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #2ecc71;
+            background-color: rgba(44, 62, 80, 0.9);
             color: white;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 4px;
-            opacity: 1;
-            transition: opacity 0.5s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
             z-index: 1000;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            max-width: 250px;
         }
 
-        .notification.hide {
-            opacity: 0;
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
         
+        .notification::before {
+            content: '✓';
+            color: #2ecc71;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        
+        /* Contact form */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        form input, form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Mobile-specific styles */
         @media (max-width: 768px) {
             .header-container {
                 justify-content: center;
@@ -439,8 +504,42 @@
                 justify-content: center;
             }
             
-            .image-thumbnails {
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem; /* Slightly larger font size for mobile */
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .product-gallery div {
+                min-width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
                 justify-content: center;
+            }
+            
+            .product-card {
+                width: 100%;
             }
         }
     </style>
@@ -456,10 +555,10 @@
             <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
             <nav id="main-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#products" class="active">Products</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <li><a href="#" id="cart-icon" style="position: relative;">
                         <span style="font-size: 1.2rem;">🛒</span>
                         <span id="cart-count" style="position: absolute; top: -8px; right: -8px; background-color: var(--accent); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: bold;">0</span>
@@ -490,73 +589,100 @@
         </div>
     </div>
     
-    <div class="container">
-        <div class="breadcrumbs">
-            <a href="index.html">Home</a> > <a href="index.html#products">Products</a> > <span>Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock</span>
+    <!-- Add to cart notification (hidden by default) -->
+    <div class="notification" id="add-notification" style="display: none;">Item added to cart</div>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Handmade Homeware</h1>
+            <p style="font-size: 1rem; font-weight: 300; max-width: 500px; margin: 0 auto 1.8rem; line-height: 1.5; color: var(--secondary); font-style: italic;">Discover our collection of artisan-made products that bring warmth and style to your living space.</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+    
+    <section id="products" class="container">
+        <div class="section-title">
+            <h2>Our Products</h2>
+        </div>
+        <div class="products-grid">
+<!-- Blue Clock Product -->
+            <div class="product-card">
+                <a href="blue-clock.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-img">
+                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg" alt="Electric Blue Clock">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock</h3>
+                        <p class="product-price">£59.00</p>
+                        <p class="product-description">Hand-crafted luxury wall clock, with precision-cut black velvet floral detail over a metallic electric blue waxed oak veneer.</p>
+                    </div>
+                </a>
+                <div class="product-info" style="padding-top: 0;">
+                    <button class="add-to-cart" data-product-id="blue-clock-001" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="59.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Pink Clock Product -->
+            <div class="product-card">
+                <a href="pink-clock.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-img">
+                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Pink%20Clock/pink%20clock%20face.jpg" alt="Pink Clock">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Luxury Floral Black Velvet on Pink Oak Veneer Wall Clock</h3>
+                        <p class="product-price">£199.00</p>
+                        <p class="product-description">Hand-crafted luxury wall clock, with precision-cut black velvet floral detail over a metallic pink waxed oak veneer.</p>
+                    </div>
+                </a>
+                <div class="product-info" style="padding-top: 0;">
+                    <button class="add-to-cart" data-product-id="pink-clock-001" data-name="Luxury Floral Black Velvet on Pink Oak Veneer Wall Clock" data-price="199.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Pink%20Clock/pink%20clock%20face.jpg">Add to Cart</button>
+                </div>
+            </div>
         </div>
         
-        <div class="product-container">
-            <div class="product-images">
-                <div class="main-image product-image">
-                    <img id="main-product-image" src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg" alt="Electric Blue Clock">
-                </div>
-                <div class="image-thumbnails">
-                    <div class="thumbnail active" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">
-                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg" alt="Electric Blue Clock Face">
-                    </div>
-                    <div class="thumbnail" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20close.jpg">
-                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20close.jpg" alt="Electric Blue Clock Close-up">
-                    </div>
-                    <div class="thumbnail" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20side.jpg">
-                        <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20side.jpg" alt="Electric Blue Clock Side View">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-details">
-                <h1 class="product-title">Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock</h1>
-                <p class="product-price">£59.00</p>
-                
-                <div class="product-description">
-                    <p>Hand-crafted luxury wall clock, with precision-cut black velvet floral detail over a metallic electric blue waxed oak veneer. 28cm (11") diameter wooden body, fitted with silent sweep-movement quartz mechanism, complete with gentle gold-coloured metal hands.</p>
-                    
-                    <p>As the faces are composed of natural materials, each product will have a unique grain, which can also result in colour variations. Please also be aware that appearance can vary significantly in different lightings, and tones display differently when viewed on different screens.</p>
-                </div>
-                
-                <div class="quantity-selector">
-                    <button id="decrease-quantity">-</button>
-                    <span id="quantity">1</span>
-                    <button id="increase-quantity">+</button>
-                </div>
-                
-                <button id="add-to-cart" class="btn add-to-cart-btn" data-product-id="blue-clock-001" data-name="Luxury Floral Black Velvet on Electric Blue Oak Veneer Wall Clock" data-price="59.00" data-image="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Electric%20blue%20clock%20face.jpg">Add to Cart</button>
-                <button id="buy-now" class="btn buy-now-btn">Buy Now</button>
-                
-                <div class="product-features">
-                    <h3 class="feature-title">Product Features</h3>
-                    <ul>
-                        <li>28cm (11") diameter</li>
-                        <li>Silent sweep-movement quartz mechanism</li>
-                        <li>Gold-coloured metal hands</li>
-                        <li>Precision-cut black velvet floral details</li>
-                        <li>Metallic electric blue waxed oak veneer</li>
-                        <li>Each piece is unique with natural wood grain variations</li>
-                        <li>Handmade with care</li>
-                    </ul>
-                </div>
-            </div>
+    </section>
+    
+    <section id="about" class="container" style="background-color: var(--light);">
+        <div class="section-title">
+            <h2>About Us</h2>
         </div>
-    </div>
-
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 0 1rem;">
+            <p>Lacewood Toucan specializes in handcrafted homeware made from high-quality, sustainable materials. Each piece is carefully designed and created by our skilled artisans who are passionate about bringing the natural beauty of wood into your home.</p>
+            <p>Our mission is to create functional, beautiful pieces that will be treasured for generations while respecting and honoring the natural materials we work with.</p>
+        </div>
+    </section>
+    
+    <section id="contact" class="container">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+        </div>
+        <form>
+            <div>
+                <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Name</label>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+                <input type="email" id="email">
+            </div>
+            <div>
+                <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
+                <textarea id="message" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn" style="border: none; cursor: pointer;">Send Message</button>
+        </form>
+    </section>
+    
     <script>
+        // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize cart from local storage or create empty cart
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // Hide notification at startup to ensure it's not visible
+            const notification = document.getElementById('add-notification');
+            if (notification) {
+                notification.style.display = 'none';
+                notification.classList.remove('show');
+            }
             
-            // Update cart count in navigation
-            updateCartCount();
-            
-            // Mobile menu toggle
             const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const mainNav = document.getElementById('main-nav');
             
@@ -564,63 +690,43 @@
                 mainNav.classList.toggle('open');
             });
             
-            // Image gallery functionality
-            const mainImage = document.getElementById('main-product-image');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-            
-            thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', function() {
-                    // Update main image
-                    mainImage.src = this.getAttribute('data-image');
-                    
-                    // Update active thumbnail
-                    thumbnails.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
+            // Close menu when clicking on a menu item
+            const menuItems = mainNav.querySelectorAll('a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    mainNav.classList.remove('open');
                 });
             });
             
-            // Quantity selector
-            const decreaseBtn = document.getElementById('decrease-quantity');
-            const increaseBtn = document.getElementById('increase-quantity');
-            const quantityElement = document.getElementById('quantity');
-            let quantity = 1;
+            // Initialize cart from local storage or create empty cart
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
             
-            decreaseBtn.addEventListener('click', function() {
-                if (quantity > 1) {
-                    quantity--;
-                    quantityElement.textContent = quantity;
-                }
-            });
+            // Update cart count in navigation
+            updateCartCount();
             
-            increaseBtn.addEventListener('click', function() {
-                quantity++;
-                quantityElement.textContent = quantity;
-            });
-            
-            // Add to cart button click event
-            const addToCartBtn = document.getElementById('add-to-cart');
-            if (addToCartBtn) {
-                addToCartBtn.addEventListener('click', function() {
-                    // Get product information from the page
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get product information from data attributes
                     const productId = this.getAttribute('data-product-id');
                     const productName = this.getAttribute('data-name');
                     const productPrice = parseFloat(this.getAttribute('data-price'));
-                    const productQuantity = parseInt(document.getElementById('quantity').textContent);
-                    const productThumbnail = this.getAttribute('data-image'); // Get the product image from data attribute
+                    const productThumbnail = this.getAttribute('data-image');
                     
-                    // Check if product already exists in cart based on product ID
+                    // Check if item already exists in cart
                     const existingItemIndex = cart.findIndex(item => item.id === productId);
                     
                     if (existingItemIndex !== -1) {
-                        // Product exists, increase quantity
-                        cart[existingItemIndex].quantity += productQuantity;
+                        // Item exists, increase quantity
+                        cart[existingItemIndex].quantity += 1;
                     } else {
-                        // Add new product
+                        // Add new item
                         cart.push({
                             id: productId,
                             name: productName,
                             price: productPrice,
-                            quantity: productQuantity,
+                            quantity: 1,
                             thumbnail: productThumbnail
                         });
                     }
@@ -634,18 +740,42 @@
                     // Show notification
                     showNotification('Item added to cart');
                 });
-            }
+            });
             
-            // Buy now button click event
-            const buyNowBtn = document.getElementById('buy-now');
-            if (buyNowBtn) {
-                buyNowBtn.addEventListener('click', function() {
-                    // Add item to cart first
-                    addToCartBtn.click();
+            // Show notification
+            function showNotification(message) {
+                // Get notification element
+                let notification = document.getElementById('add-notification');
+                if (!notification) {
+                    notification = document.createElement('div');
+                    notification.id = 'add-notification';
+                    notification.className = 'notification';
+                    document.body.appendChild(notification);
+                }
+                
+                // Clear any existing timers
+                if (notification.timer) {
+                    clearTimeout(notification.timer);
+                }
+                
+                // Update message and show
+                notification.textContent = message;
+                notification.style.display = 'flex';
+                
+                // Use setTimeout to ensure display change applies before adding the show class
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                // Hide notification after 2.5 seconds
+                notification.timer = setTimeout(function() {
+                    notification.classList.remove('show');
                     
-                    // Then redirect to checkout
-                    window.location.href = 'checkout.html';
-                });
+                    // After transition completes, hide element completely
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 300); // Match the CSS transition duration
+                }, 2500);
             }
             
             // Shopping Cart Functionality
@@ -657,7 +787,7 @@
             const checkoutBtn = document.getElementById('checkout-btn');
             const clearCartBtn = document.getElementById('clear-cart');
             
-            // Open cart modal - FIX APPLIED HERE
+            // Open cart modal
             if (cartIcon) {
                 cartIcon.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -701,25 +831,6 @@
                     // Redirect to checkout page
                     window.location.href = 'checkout.html';
                 });
-            }
-            
-            // Show notification
-            function showNotification(message) {
-                // Create notification element if it doesn't exist
-                let notification = document.querySelector('.notification');
-                if (!notification) {
-                    notification = document.createElement('div');
-                    notification.className = 'notification';
-                    document.body.appendChild(notification);
-                }
-                
-                notification.textContent = message;
-                notification.classList.remove('hide');
-                
-                // Hide notification after 2 seconds
-                setTimeout(function() {
-                    notification.classList.add('hide');
-                }, 2000);
             }
             
             // Update cart count
