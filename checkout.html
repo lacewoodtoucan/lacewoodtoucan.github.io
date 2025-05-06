@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout | Lacewood Toucan</title>
     <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+        
         :root {
             --primary: #2c3e50;
             --secondary: #34495e;
-            --accent: #c0392b;
+            --accent: #00b8b8; /* Changed to match index.html's teal/turquoise */
             --light: #ecf0f1;
             --dark: #2c3e50;
+            --handwritten: 'Caveat', cursive;
         }
         
         body {
@@ -20,6 +24,18 @@
             background-color: #f8f9fa;
             color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        *, *:before, *:after {
+            box-sizing: inherit; /* Ensure all elements respect box-sizing */
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
         }
         
         header {
@@ -28,6 +44,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            width: 100%;
         }
         
         .header-container {
@@ -43,25 +60,36 @@
         .logo {
             display: flex;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.0rem;
         }
         
         .logo img {
             height: auto;
-            max-height: 50px;
+            max-height: 200px; /* Default size for mobile */
             margin-right: 1rem;
         }
         
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
+        /* Make logo larger on desktop */
+        @media (min-width: 768px) {
+            .logo img {
+                max-height: 100px; /* Approximately twice as big for desktop */
+            }
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 5%;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-family: var(--handwritten);
+            font-weight: 700;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 1.5rem;
         }
         
         .checkout-container {
@@ -145,7 +173,7 @@
         }
         
         .payment-option:hover, .payment-option.selected {
-            border-color: var(--primary);
+            border-color: var(--accent);
         }
         
         .payment-option-header {
@@ -212,7 +240,7 @@
         }
         
         .btn:hover {
-            background-color: #a93226;
+            background-color: #009999; /* Darker teal for hover state */
         }
         
         .paypal-button {
@@ -252,13 +280,17 @@
                 flex-direction: column;
                 gap: 0;
             }
+            
+            h1 {
+                font-size: 2.3rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <div class="logo" style="margin: 0 auto;">
+            <div class="logo" style="justify-content: center; width: 100%;">
                 <a href="index.html">
                     <img src="https://raw.githubusercontent.com/lacewoodtoucan/lacewoodtoucan.github.io/main/docs/assets/images/Full%20name_Final.png" alt="Lacewood Toucan Logo">
                 </a>
