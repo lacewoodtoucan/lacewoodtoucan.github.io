@@ -868,3 +868,24 @@
                         localStorage.setItem('cart', JSON.stringify(cart));
                         
                         // Update display
+                        updateCartCount();
+                        updateCartDisplay();
+                    });
+                });
+            }
+            
+            // Listen for keypress events on document level to close cart with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && cartModal.style.display === 'flex') {
+                    cartModal.style.display = 'none';
+                }
+            });
+            
+            // Initialize the cart display if cart is shown by default
+            if (cartModal.style.display === 'flex') {
+                updateCartDisplay();
+            }
+        });
+    </script>
+</body>
+</html>
