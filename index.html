@@ -50,6 +50,8 @@
             width: 100%;
             /* Set the height of the header */
             height: var(--header-height);
+            display: flex;
+            align-items: center;
         }
         
         /* Add scroll margin to section targets */
@@ -64,25 +66,28 @@
             padding: 1rem 5%;
             max-width: 1200px;
             margin: 0 auto;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
+            width: 100%;
+            background-color: white;
         }
         
-.logo {
+        .logo {
             display: flex;
             align-items: center;
-            margin-bottom: 0.0rem;
+            margin-bottom: 0;
+            margin-right: 1rem;
+            flex-shrink: 0;
         }
         
         .logo img {
             height: auto;
-            max-height: 200px; /* Default size for mobile */
+            max-height: 70px; /* Default size for mobile */
             margin-right: 1rem;
         }
         
         /* Make logo larger on desktop */
         @media (min-width: 768px) {
             .logo img {
-                max-height: 100px; /* Approximately twice as big for desktop */
+                max-height: 80px;
             }
         }
         
@@ -110,7 +115,8 @@
         }
         
         nav {
-            width: 100%;
+            flex-grow: 1;
+            background-color: white;
         }
         
         nav ul {
@@ -118,7 +124,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            justify-content: center;
+            justify-content: flex-end;
             flex-wrap: wrap; /* Allow wrapping on small screens */
         }
         
@@ -132,6 +138,7 @@
             font-weight: 500;
             transition: color 0.3s;
             white-space: nowrap;
+            padding: 0.5rem;
         }
         
         nav ul li a:hover, 
@@ -479,16 +486,21 @@
             }
             
             .header-container {
-                justify-content: center;
-                text-align: center;
                 padding: 0.5rem;
+                flex-wrap: wrap;
             }
             
             .mobile-menu-toggle {
                 display: block;
                 position: absolute;
-                top: 1rem;
+                top: 1.2rem;
                 right: 1rem;
+                z-index: 110;
+            }
+            
+            .logo {
+                margin-left: auto;
+                margin-right: auto;
             }
             
             nav {
@@ -496,6 +508,11 @@
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.3s ease-out;
+                background-color: white;
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.1);
             }
             
             nav.open {
@@ -505,17 +522,13 @@
             nav ul {
                 flex-direction: column;
                 width: 100%;
+                justify-content: center;
             }
             
             nav ul li {
                 margin: 0.5rem 0;
                 width: 100%;
                 text-align: center;
-            }
-            
-            .logo {
-                margin-bottom: 0;
-                justify-content: center;
             }
             
             .hero {
@@ -569,10 +582,10 @@
             <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
             <nav id="main-nav">
                 <ul>
-                    <li><a href="#" id="nav-home" class="active">Home</a></li>
-                    <li><a href="#products" id="nav-products">Products</a></li>
-                    <li><a href="#about" id="nav-about">About</a></li>
-                    <li><a href="#contact" id="nav-contact">Contact</a></li>
+                    <li><a href="#" class="nav-link active" data-section="hero">Home</a></li>
+                    <li><a href="#products" class="nav-link" data-section="products">Products</a></li>
+                    <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                    <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
                     <li><a href="#" id="cart-icon" style="position: relative;">
                         <span style="font-size: 1.2rem;">🛒</span>
                         <span id="cart-count" style="position: absolute; top: -8px; right: -8px; background-color: var(--accent); color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: bold;">0</span>
@@ -606,7 +619,7 @@
     <!-- Add to cart notification (hidden by default) -->
     <div class="notification" id="add-notification" style="display: none;">Item added to cart</div>
     
-    <section class="hero">
+    <section id="hero" class="hero">
         <div class="hero-content">
             <h1>Handmade Homeware</h1>
             <p style="font-size: 1rem; font-weight: 300; max-width: 500px; margin: 0 auto 1.8rem; line-height: 1.5; color: var(--secondary); font-style: italic;">Discover our collection of artisan-made products that bring warmth and style to your living space.</p>
@@ -852,7 +865,7 @@
                     cartCountElement.textContent = totalItems;
                 }
             }
-            
+                        
             // Update cart display
             function updateCartDisplay() {
                 if (!cartItemsContainer || !cartTotalElement) {
