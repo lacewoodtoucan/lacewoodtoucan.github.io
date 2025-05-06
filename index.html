@@ -15,6 +15,7 @@
             --light: #ecf0f1;
             --dark: #2c3e50;
             --handwritten: 'Caveat', cursive;
+            --header-height: 100px; /* Define header height variable */
         }
         
         body {
@@ -27,6 +28,8 @@
             overflow-x: hidden; /* Prevent horizontal scrolling */
             width: 100%;
             box-sizing: border-box;
+            /* Add scroll behavior for smooth scrolling */
+            scroll-behavior: smooth;
         }
         
         *, *:before, *:after {
@@ -45,6 +48,13 @@
             top: 0;
             z-index: 100;
             width: 100%;
+            /* Set the height of the header */
+            height: var(--header-height);
+        }
+        
+        /* Add scroll margin to section targets */
+        section[id] {
+            scroll-margin-top: calc(var(--header-height) + 20px);
         }
         
         .header-container {
@@ -464,6 +474,10 @@
         
         /* Mobile-specific styles */
         @media (max-width: 768px) {
+            :root {
+                --header-height: 70px; /* Smaller header height for mobile */
+            }
+            
             .header-container {
                 justify-content: center;
                 text-align: center;
