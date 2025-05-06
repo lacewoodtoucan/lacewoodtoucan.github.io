@@ -888,21 +888,15 @@
             });
             
             // Checkout functionality
-            checkoutBtn.addEventListener('click', function() {
-                if (cart.length === 0) {
-                    showNotification('Your cart is empty');
-                    return;
-                }
-                
-                // Here you would typically redirect to a checkout page
-                alert('Proceeding to checkout...');
-                // For demo purposes, we'll just clear the cart
-                cart = [];
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartCount();
-                updateCartDisplay();
-                cartModal.style.display = 'none';
-            });
+                        checkoutBtn.addEventListener('click', function() {
+                            if (cart.length === 0) {
+                                showNotification('Your cart is empty');
+                                return;
+                            }
+                            
+                            // Redirect to checkout page
+                            window.location.href = 'checkout.html';
+                        });
             
             // Update cart count in navigation
             function updateCartCount() {
